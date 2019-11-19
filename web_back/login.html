@@ -57,6 +57,13 @@
         $("#btn").click(function() {
             var myname = $("#myname").val().trim();
             var mypassword = $("#mypassword").val().trim();
+            if (myname === "" || mypassword === "") {
+                $("#tishi").text("用户名或密码不能为空")
+                $('#myModal').modal()
+                return
+            }
+
+
             $.post("http://localhost:8000/admin/login", {
                 user_name: myname,
                 password: mypassword
