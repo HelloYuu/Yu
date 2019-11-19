@@ -53,34 +53,27 @@
     <!-- /.modal -->
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/utils/user.js"></script>
     <script>
         $("#btn").click(function() {
             var myname = $("#myname").val().trim();
             var mypassword = $("#mypassword").val().trim();
             if (myname === "" || mypassword === "") {
-                $("#tishi").text("用户名或密码不能为空")
-                $('#myModal').modal()
-                return
+                $("#tishi").text("用户名或密码不能为空");
+                $('#myModal').modal();
+                return;
             }
-
-
-            $.post("http://localhost:8000/admin/login", {
-                user_name: myname,
-                password: mypassword
-            }, function(res) {
+            user.login(myname, mypassword, function(res) {
                 if (res.code === 200) {
                     window.location.href = "./index.html"
                 } else if (res.code === 400) {
                     // alert("msg")
-                    $("#tishi").text(res.msg)
-                    $('#myModal').modal()
-                }
-                console.log(res);
-
+                    $("#tishi").text(res.msg);
+                    $('#myModal').modal();
+                };
+                // console.log(res);
 
             })
-
-
         })
     </script>
 
